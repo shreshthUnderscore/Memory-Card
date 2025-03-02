@@ -1,25 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../Card/card";
+import styles from "./Canvas.module.css";
 
 function Canvas() {
+  const [emojiArray, setEmojiArray] = useState([]);
+
   useEffect(() => {
     const fetchEmoji = async () => {
+      const emojiIds = [
+        "1f600",
+        "1f603",
+        "1f604",
+        "1f601",
+        "1f642",
+        "1f60a",
+        "1f617",
+        "1f61a",
+        "1f619",
+        "1f61b",
+        "1f610",
+        "1f611",
+      ];
+
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}?name=slightly smiling face`,
-          {
-            headers: {
-              "X-Api-Key": `${import.meta.env.VITE_API_KEY}`,
-            },
-          }
-        );
+        const emojiData = emojiIds.map((id) => ({
+          id,
+          imageUrl: `${import.meta.env.VITE_API_URL}${id}/512.png`,
+        }));
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
+        setEmojiArray(emojiData);
       } catch (error) {
         console.error("error", error);
       }
@@ -30,8 +39,10 @@ function Canvas() {
 
   return (
     <>
-      <div>
-        <Card />
+      <div className={styles.canvas}>
+        {emojiArray.map((emojiObject) => (
+          <Card key={emojiObject.id} data={emojiObject} />
+        ))}
       </div>
     </>
   );
