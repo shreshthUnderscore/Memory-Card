@@ -66,10 +66,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(clickedEmoji);
-  }, [clickedEmoji]);
-
-  useEffect(() => {
     if (score > highScore) {
       setHighscore(score);
     }
