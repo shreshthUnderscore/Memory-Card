@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./header.module.css";
 
-function Header() {
+function Header({ score, highScore }) {
   return (
     <>
       <div className={styles.header}>
@@ -10,8 +10,8 @@ function Header() {
       </div>
 
       <div className={styles.score}>
-        <h2>Score: </h2>
-        <h2>High Score: </h2>
+        <h2>Score: {score}</h2>
+        <h2>High Score: {highScore}</h2>
       </div>
     </>
   );
